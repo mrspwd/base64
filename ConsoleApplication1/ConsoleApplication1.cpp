@@ -74,6 +74,8 @@ int main() {
 	cout << "pd=" << pd << endl;
 
 	const type_info &xx = typeid(pd);
+
+	cout << xx.name() << endl;
 	cout << xx.raw_name() << endl;
 
 	int a;
