@@ -78,7 +78,18 @@ int main() {
 	cout << xx.name() << endl;
 	cout << xx.raw_name() << endl;
 
-	int a;
-	cin >> a;
+	int t[] = { 2,3,5,6,9 };
+	int *p = t;//此时 p指向a[0]
+	cout << *p << endl;
+	//int a;
+	//cin >> a;
+
+	system("pause");
 	return 0;
+}
+
+template<typename T> void Swap(T &a, T &b) {
+	T temp = a;
+	a = b;
+	b = temp;
 }
