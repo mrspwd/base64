@@ -44,6 +44,7 @@ int main()
 
 	//string xxx = "YXNkYWtqZmtsc2pkYWY7J2FzZmRrJ2Rna2onZmRnYXNkJ2ZhcydkZnMnYWRmYXNkZidzYWRmO2xhc2RmO2wA";
 	//base64Decode((unsigned char*)xxx.c_str(), (unsigned int)xxx.length(), &c);
+	//test
 
 	cout << c << endl;
 	return 0;
