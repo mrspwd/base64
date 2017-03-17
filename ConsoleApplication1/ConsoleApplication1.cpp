@@ -27,21 +27,23 @@ std::vector<std::string> split(std::string str, std::string pattern)
 }
 int main()
 {
+	// 用于*.manifest 更新url 编码 编码格式 url,url,url,url
+	std::string xx = "http://xxx.xxxx.com:8091/version.manifest,http://xxx.xxx.com:8092/version.manifest,http://xxx.xxx.com:8093/xxx.manifest,http://xxxx.xxx.com:8094/version.manifest";
 
-	std::string xx = "http://www.baidu.com";
+	string aa = xx.substr(0, 114);
+	bool xxxxx = aa == "http";
+
 	unsigned char *c = nullptr;
 	char *d = nullptr;
-	base64Encode((unsigned const char*)xx.c_str(), (unsigned int)xx.length(), &d);
+	base64Encode((unsigned const char*)xx.c_str(), (unsigned int)xx.length()+1, &d);
 	cout << d << endl;
 	unsigned char* x = (unsigned char*)d;
 	cout << x << endl;
 	base64Decode(x, strlen((char*)x), &c);
 	cout << c << endl;
 
-
-	//string xxx = "aHR0cDovL3d3dy5iYWlkdS5jb20=";
-	string xxx = "YQ==";
-	base64Decode((unsigned char*)xxx.c_str(), (unsigned int)xxx.length(), &c);
+	//string xxx = "YXNkYWtqZmtsc2pkYWY7J2FzZmRrJ2Rna2onZmRnYXNkJ2ZhcydkZnMnYWRmYXNkZidzYWRmO2xhc2RmO2wA";
+	//base64Decode((unsigned char*)xxx.c_str(), (unsigned int)xxx.length(), &c);
 
 	cout << c << endl;
 	return 0;
