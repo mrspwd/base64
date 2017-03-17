@@ -1,95 +1,49 @@
-// ConsoleApplication1.cpp : 定义控制台应用程序的入口点。
-//
-
 #include "stdafx.h"
+
 #include <iostream>
+#include <vector>
+#include "base64.h"
 using namespace std;
-//基类A
-class A {
-public:
-	A(int a);
-public:
-	void display();
-protected:
-	int m_a;
-};
-A::A(int a) : m_a(a) { }
-void A::display() {
-	cout << "Class A: m_a=" << m_a << endl;
-}
-//中间派生类B
-class B : public A {
-public:
-	B(int a, int b);
-public:
-	void display();
-protected:
-	int m_b;
-};
-B::B(int a, int b) : A(a), m_b(b) { }
-void B::display() {
-	cout << "Class B: m_a=" << m_a << ", m_b=" << m_b << endl;
-}
-//基类C
-class C {
-public:
-	C(int c);
-public:
-	void display();
-protected:
-	int m_c;
-};
-C::C(int c) : m_c(c) { }
-void C::display() {
-	cout << "Class C: m_c=" << m_c << endl;
-}
-//最终派生类D
-class D : public B, public C {
-public:
-	D(int a, int b, int c, int d);
-public:
-	void display();
-private:
-	int m_d;
-};
-D::D(int a, int b, int c, int d) : B(a, b), C(c), m_d(d) { }
-void D::display() {
-	cout << "Class D: m_a=" << m_a << ", m_b=" << m_b << ", m_c=" << m_c << ", m_d=" << m_d << endl;
-}
-int main() {
-	A *pa = new A(1);
-	B *pb = new B(2, 20);
-	C *pc = new C(3);
-	D *pd = new D(4, 40, 400, 4000);
-	pa = pd;
-	pa->display();
-	pb = pd;
-	pb->display();
-	pc = pd;
-	pc->display();
-	cout << "-----------------------" << endl;
-	cout << "pa=" << pa << endl;
-	cout << "pb=" << pb << endl;
-	cout << "pc=" << pc << endl;
-	cout << "pd=" << pd << endl;
+using namespace cocos2d;
+// todo
+std::vector<std::string> split(std::string str, std::string pattern)
+{
+	std::string::size_type pos;
+	std::vector<std::string> result;
+	str += pattern;//扩展字符串以方便操作
+	int size = str.size();
 
-	const type_info &xx = typeid(pd);
+	for (int i = 0; i < size; i++)
+	{
+		pos = str.find(pattern, i);
+		if (pos < size)
+		{
+			std::string s = str.substr(i, pos - i);
+			result.push_back(s);
+			i = pos + pattern.size() - 1;
+		}
+	}
+	return result;
+}
+int main()
+{
 
-	cout << xx.name() << endl;
-	cout << xx.raw_name() << endl;
+	std::string xx = "http://www.baidu.com";
+	unsigned char *c = nullptr;
+	char *d = nullptr;
+	base64Encode((unsigned const char*)xx.c_str(), (unsigned int)xx.length(), &d);
+	cout << d << endl;
+	unsigned char* x = (unsigned char*)d;
+	cout << x << endl;
+	base64Decode(x, strlen((char*)x), &c);
+	cout << c << endl;
 
-	int t[] = { 2,3,5,6,9 };
-	int *p = t;//此时 p指向a[0]
-	cout << *p << endl;
-	//int a;
-	//cin >> a;
 
-	system("pause");
+	//string xxx = "aHR0cDovL3d3dy5iYWlkdS5jb20=";
+	string xxx = "YQ==";
+	base64Decode((unsigned char*)xxx.c_str(), (unsigned int)xxx.length(), &c);
+
+	cout << c << endl;
 	return 0;
 }
 
-template<typename T> void Swap(T &a, T &b) {
-	T temp = a;
-	a = b;
-	b = temp;
-}
